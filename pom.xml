@@ -29,18 +29,19 @@
 	<name>fabric8 AMQ :: Fuse Fabric8 AMQ</name>
 
 	<properties>
-		<jboss.fuse.bom.version>6.1.1.redhat-423</jboss.fuse.bom.version>
+		<jboss.fuse.bom.version>6.2.1.redhat-084</jboss.fuse.bom.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
 		<maven-resources-plugin-version>2.5-redhat-1</maven-resources-plugin-version>
 		<maven-bundle-plugin-version>2.5.4</maven-bundle-plugin-version>
 		<maven-surefire-plugin-version>2.12.2-redhat-1</maven-surefire-plugin-version>
 		<build-helper-maven-plugin-version>1.5-redhat-1</build-helper-maven-plugin-version>
-		<fabric8-maven-plugin-version>1.2.0.Beta4</fabric8-maven-plugin-version>
+		<fabric8-maven-plugin-version>1.2.0.redhat-621084</fabric8-maven-plugin-version>
 	</properties>
 	<modules>
 		<module>fabric-amq-producer</module>
 		<module>fabric-amq-consumer</module>
+		<module>features</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -80,7 +81,31 @@
 		</plugins>
 	</pluginManagement>
 	</build>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>fusesource.m2</id>
+			<name>FuseSource Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<repositories>
+		<repository>
+			<id>fusesource.m2</id>
+			<name>FuseSource Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 		<repository>
 			<id>fusesource.releases</id>
 			<name>FuseSource Release Repository</name>
@@ -103,5 +128,22 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+		<repository>
+			<id>maven.m2</id>
+			<name>Maven central Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 	</repositories>
+        <distributionManagement>
+                <repository>
+                        <id>fabric-upload</id>
+                        <url>file:///home/mrobson/maven/</url>
+                </repository>
+        </distributionManagement>
 </project>

@@ -5,10 +5,10 @@
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
 	<camelContext trace="false" xmlns="http://camel.apache.org/schema/blueprint">
-  <route id="consume-messages">
-    <from uri="amq:queue:redhat.queue"/>
-    <log message="${body}"/>
-    <to uri="file://data/activemq/?fileExist=Append&amp;fileName=RedHatConsumer-${date:now:yyyyMMdd}.txt"/>
-  </route>
-</camelContext>
+		<route id="consume-messages">
+			<from uri="amq:queue:com.redhat.queue1"/>
+			<log message="${body}"/>
+			<to uri="file://data/activemq/?fileExist=Append&amp;fileName=RedHatConsumer-${date:now:yyyyMMdd}.txt"/>
+		</route>
+	</camelContext>
 </blueprint>

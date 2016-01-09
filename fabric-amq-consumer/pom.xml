@@ -33,10 +33,12 @@
 	
 	<properties>
 		<fabric8.profile>example-fabric8-amq-consumer</fabric8.profile>
-		<fabric8.parentProfiles>feature-camel mq-fabric-camel</fabric8.parentProfiles>
-		<fabric8.profileVersion>1.5</fabric8.profileVersion>
-		<fabric8.features>camel-jms camel-blueprint fabric-camel mq-fabric-camel activemq-client</fabric8.features>
-		<fabric8.includeArtifact>true</fabric8.includeArtifact>
+		<fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
+		<fabric8.featureRepos>mvn:org.mrobson.example.fabric8-amq/amq-pc-features/1.0-SNAPSHOT/xml/features</fabric8.featureRepos>
+		<fabric8.profileVersion>1.0</fabric8.profileVersion>
+		<fabric8.features>fuse-fabric8-amq-consumer</fabric8.features>
+		<fabric8.includeArtifact>false</fabric8.includeArtifact>
+		<fabric8.upload>false</fabric8.upload>
 	</properties>
 
 	<dependencies>
@@ -47,18 +49,6 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-osgi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.amq</groupId>
-			<artifactId>mq-fabric-camel</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.fabric8</groupId>
@@ -81,37 +71,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>filter</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>resources</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-artifacts</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attach-artifact</goal>
-						</goals>
-						<configuration>
-							<artifacts>
-								<artifact>
-									<file>target/classes/features.xml</file>
-									<type>xml</type>
-									<classifier>features</classifier>
-								</artifact>
-							</artifacts>
-						</configuration>
-					</execution>
-				</executions>
+                                <configuration>
+                                        <encoding>UTF-8</encoding>
+                                </configuration>
 			</plugin>
 		</plugins>
 	</build>

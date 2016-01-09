@@ -26,47 +26,53 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mrobson.example.fabric8-amq</groupId>
-	<artifactId>producer</artifactId>
-	<packaging>bundle</packaging>
-	<name>fabric8 AMQ :: Producer</name>
+	<artifactId>amq-pc-features</artifactId>
+	<packaging>pom</packaging>
+	<name>fabric8 AMQ :: Producer and Consumer Feature</name>
 
-	<properties>
-		<fabric8.profile>example-fabric8-amq-producer</fabric8.profile>
-		<fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
-		<fabric8.featureRepos>mvn:org.mrobson.example.fabric8-amq/amq-pc-features/1.0-SNAPSHOT/xml/features</fabric8.featureRepos>
-		<fabric8.profileVersion>1.0</fabric8.profileVersion>
-		<fabric8.features>fuse-fabric8-amq-producer</fabric8.features>
-		<fabric8.includeArtifact>false</fabric8.includeArtifact>
-		<fabric8.upload>false</fabric8.upload>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-blueprint</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.fabric8</groupId>
-			<artifactId>fabric-camel</artifactId>
-		</dependency>
-	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-                                <configuration>
-                                        <encoding>UTF-8</encoding>
-                                </configuration>
+				<executions>
+					<execution>
+						<id>filter</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>attach-artifact</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>target/classes/features.xml</file>
+									<type>xml</type>
+									<classifier>features</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

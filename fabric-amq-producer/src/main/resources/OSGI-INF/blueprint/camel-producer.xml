@@ -5,13 +5,12 @@
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
 	<camelContext trace="false" xmlns="http://camel.apache.org/schema/blueprint">
-  <route id="produce-random-message">
-    <from uri="timer://productionTimer?fixedRate=true&amp;period=1000"/>
-    <bean ref="myProducer" method="produce"/>
-    <log message="${body}"/>
-    <to uri="amq:queue:redhat.queue"/>
-  </route>
-</camelContext>
-
-    <bean id="myProducer" class="org.mrobson.example.amq.producer.MyProducer"/>
+		<route id="produce-random-message">
+			<from uri="timer://productionTimer?fixedRate=true&amp;period=1000"/>
+			<bean ref="myProducer" method="produce"/>
+			<log message="${body}"/>
+			<to uri="amq:queue:com.redhat.queue1"/>
+		</route>
+	</camelContext>
+	<bean id="myProducer" class="org.mrobson.example.amq.producer.MyProducer"/>
 </blueprint>

@@ -26,7 +26,7 @@ import java.util.Date;
 public class MyProducer {
 
     public Object produce() {
-        String message = "The message time is: " + new Date() + " \n";
+        String message = "The message time is: " + new Date();
         return message;
     }
 }
